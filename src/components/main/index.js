@@ -4,7 +4,7 @@ import Purchase from '../purchase';
 
 const Main = () => {
     return (
-        <main>
+        <main className='main'>
             <ListItems />
             <Cupon />
             <Purchase />

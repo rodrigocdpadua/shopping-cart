@@ -2,7 +2,7 @@ import Item from '../item'
 
 const ListItems = () => {
     return (
-        <div>
+        <div className='list-items'>
             <ul>
                 <Item
                 title='Banana'

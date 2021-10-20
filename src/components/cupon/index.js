@@ -1,6 +1,6 @@
 const Cupon = () => {
     return (
-        <div>
+        <div className='cupon'>
             <input placeholder="Cupon Code"/>
             <button>Apply</button>
         </div>
