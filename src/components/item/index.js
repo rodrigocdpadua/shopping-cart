@@ -1,10 +1,13 @@
+import '../../styles.css';
+
 const Item = (props) => {
     return (
         <div className='items'>
-            <img src={props.src} width="200px" height="180px"></img>
+            <img src={props.src}></img>
             <h2>{props.title}</h2>
-            <p>Price: {props.price} per kg</p>
-            <button>Adicionar</button>
+            <p>Price: {parseFloat(props.price)} per kg</p>
+            <input placeholder="kg"/>
+            <button>Add</button>
         </div>
     );
 }

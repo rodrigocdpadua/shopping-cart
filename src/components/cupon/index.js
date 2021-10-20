@@ -1,3 +1,5 @@
+import '../../styles.css';
+
 const Cupon = () => {
     return (
         <div className='cupon'>
