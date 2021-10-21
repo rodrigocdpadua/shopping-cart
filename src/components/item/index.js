@@ -20,7 +20,7 @@ class Item extends React.Component {
     }
 
     purchaseFunction(){
-        if(this.state.value != ''){
+        if(this.state.value !== ''){
             let priceKG = this.state.value * this.state.price;
             this.props.purchaseFunction(this.state.value, priceKG);
             this.setState({

@@ -11,12 +11,14 @@ class Main extends React.Component {
             price: 0,
             kg: 0,
             shipping: 0,
+            code: '',
             descount: 0,
             total: 0
         }
         this.purchase = this.purchase.bind(this);
         this.shipping = this.shipping.bind(this);
         this.cupon = this.cupon.bind(this);
+        this.descountCupon = this.descountCupon.bind(this);
         this.total = this.total.bind(this);
     };
 
@@ -28,6 +30,10 @@ class Main extends React.Component {
 
         setTimeout(() => {
             this.shipping();
+        }, 1);
+
+        setTimeout(() => {
+            this.descountCupon();
         }, 1);
 
         setTimeout(() => {
@@ -53,7 +59,40 @@ class Main extends React.Component {
     }
 
     cupon(code){
-        console.log("Cupon");
+        if(code === 'A' || code === 'FOO' || code === 'C'){
+            this.setState({
+                code: code
+            });
+
+            setTimeout(() => {
+                this.descountCupon();
+            }, 1);
+    
+            setTimeout(() => {
+                this.total();
+            }, 1);
+
+        } else {
+            alert('Invalid Cupon');
+        }
+    }
+
+    descountCupon(){
+        let descount = 0;
+        let withoutCupon = this.state.price;
+
+        if(this.state.code === 'A'){
+            descount = (withoutCupon*30)/100;
+        } else if(this.state.code === 'FOO'){
+            descount = 100;
+        } else if(this.state.code === 'C'){
+            if(this.state.total >= 300.50){
+                descount = this.state.shipping;
+            }
+        }
+        this.setState({
+            descount: descount
+        });
     }
 
     total(){
