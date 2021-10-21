@@ -54,22 +54,17 @@ class Main extends React.Component {
     }
 
     coupon = (code) => {
-        if(code === 'A' || code === 'FOO' || code === 'C' || code == ''){
-            this.setState({
-                code: code
-            });
+        this.setState({
+            code: code
+        });
 
-            setTimeout(() => {
-                this.descountCoupon();
-            }, 1);
-    
-            setTimeout(() => {
-                this.total();
-            }, 1);
+        setTimeout(() => {
+            this.descountCoupon();
+        }, 1);
 
-        } else {
-            alert('Invalid Coupon');
-        }
+        setTimeout(() => {
+            this.total();
+        }, 1);
     }
 
     descountCoupon = () => {

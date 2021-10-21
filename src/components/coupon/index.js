@@ -17,12 +17,18 @@ class Coupon extends React.Component {
     }
 
     applyCoupon = () => {
-        if(this.state.value !== ''){
+        if(this.state.value === 'A' || this.state.value === 'FOO' || this.state.value === 'C'){
             this.props.couponFunction(this.state.value);
 
             this.setState({
                 readOnly: true,
                 couponOn: true
+            });
+        } else {
+            alert('Invalid Coupon');
+            
+            this.setState({
+                value: ''
             });
         }
     }
