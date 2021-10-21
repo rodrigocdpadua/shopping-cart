@@ -16,7 +16,7 @@ class Item extends React.Component {
     }
 
     handleChange(event) {
-        this.setState({ value: parseInt(event.target.value) });
+        this.setState({value: parseInt(event.target.value) });
     }
 
     purchaseFunction(){
@@ -34,8 +34,8 @@ class Item extends React.Component {
             <div className='items'>
                 <img src={this.state.src} alt=''></img>
                 <h2>{this.state.title}</h2>
-                <p>Price: {parseFloat(this.props.price)} per kg</p>
-                <input value={this.state.value} onChange={this.handleChange} placeholder="kg"/>
+                <p>Price: {this.props.price.toFixed(2)} per kg</p>
+                <input value={this.state.value} type="number" onChange={this.handleChange} placeholder="kg"/>
                 <button onClick={this.purchaseFunction}>Add</button>
             </div>
         );

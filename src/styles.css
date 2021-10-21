@@ -61,7 +61,7 @@ body{
     border-bottom-left-radius: 5px;
 }
 
-.cupon{
+.coupon{
     display: flex;
     justify-content: center;
     width: 100%;
@@ -69,13 +69,13 @@ body{
     padding-bottom: 20px;
     background-color: #ff1b1b;
 }
-.cupon input{
+.coupon input{
     margin-right: 5px;
     padding-left: 5px;
     border: none;
     border-radius: 5px;
 }
-.cupon button{
+.coupon button{
     margin-left: 5px;
     padding-right: 5px;
     padding-left: 5px;

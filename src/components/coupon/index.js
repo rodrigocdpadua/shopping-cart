@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../styles.css';
 
-class Cupon extends React.Component {
+class Coupon extends React.Component {
     constructor(props){
         super(props);
 
@@ -10,16 +10,16 @@ class Cupon extends React.Component {
             readOnly: false
         }
         this.handleChange = this.handleChange.bind(this);
-        this.cuponFunction = this.cuponFunction.bind(this);
+        this.couponFunction = this.couponFunction.bind(this);
     }
 
     handleChange(event) {
         this.setState({ value: event.target.value });
     }
 
-    cuponFunction(){
+    couponFunction(){
         if(this.state.value !== ''){
-            this.props.cuponFunction(this.state.value);
+            this.props.couponFunction(this.state.value);
 
             this.setState({
                 readOnly: true
@@ -29,12 +29,12 @@ class Cupon extends React.Component {
 
     render(){
         return (
-            <div className='cupon'>
-                <input value={this.state.value} onChange={this.handleChange} placeholder="Cupon Code" readOnly={this.state.readOnly}/>
-                <button onClick={this.cuponFunction}>Apply</button>
+            <div className='coupon'>
+                <input value={this.state.value} onChange={this.handleChange} placeholder="Coupon Code" readOnly={this.state.readOnly}/>
+                <button onClick={this.couponFunction}>Apply</button>
             </div>
         );
     }
 }
 
-export default Cupon;
+export default Coupon;

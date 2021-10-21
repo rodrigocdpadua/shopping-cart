@@ -1,6 +1,6 @@
 import React from 'react';
 import ListItems from '../list-items';
-import Cupon from '../cupon';
+import Coupon from '../coupon';
 import Purchase from '../purchase';
 import '../../styles.css';
 
@@ -17,8 +17,8 @@ class Main extends React.Component {
         }
         this.purchase = this.purchase.bind(this);
         this.shipping = this.shipping.bind(this);
-        this.cupon = this.cupon.bind(this);
-        this.descountCupon = this.descountCupon.bind(this);
+        this.coupon = this.coupon.bind(this);
+        this.descountCoupon = this.descountCoupon.bind(this);
         this.total = this.total.bind(this);
     };
 
@@ -33,7 +33,7 @@ class Main extends React.Component {
         }, 1);
 
         setTimeout(() => {
-            this.descountCupon();
+            this.descountCoupon();
         }, 1);
 
         setTimeout(() => {
@@ -58,14 +58,14 @@ class Main extends React.Component {
         }
     }
 
-    cupon(code){
+    coupon(code){
         if(code === 'A' || code === 'FOO' || code === 'C'){
             this.setState({
                 code: code
             });
 
             setTimeout(() => {
-                this.descountCupon();
+                this.descountCoupon();
             }, 1);
     
             setTimeout(() => {
@@ -73,16 +73,16 @@ class Main extends React.Component {
             }, 1);
 
         } else {
-            alert('Invalid Cupon');
+            alert('Invalid Coupon');
         }
     }
 
-    descountCupon(){
+    descountCoupon(){
         let descount = 0;
-        let withoutCupon = this.state.price;
+        let withoutCoupon = this.state.price;
 
         if(this.state.code === 'A'){
-            descount = (withoutCupon*30)/100;
+            descount = (withoutCoupon*30)/100;
         } else if(this.state.code === 'FOO'){
             descount = 100;
         } else if(this.state.code === 'C'){
@@ -107,7 +107,7 @@ class Main extends React.Component {
         return (
             <main className='main'>
                 <ListItems purchaseFunction={this.purchase}/>
-                <Cupon cuponFunction={this.cupon}/>
+                <Coupon couponFunction={this.coupon}/>
                 <Purchase 
                 price={this.state.price}
                 shipping={this.state.shipping}
