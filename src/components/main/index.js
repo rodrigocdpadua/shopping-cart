@@ -54,7 +54,7 @@ class Main extends React.Component {
     }
 
     coupon = (code) => {
-        if(code === 'A' || code === 'FOO' || code === 'C'){
+        if(code === 'A' || code === 'FOO' || code === 'C' || code == ''){
             this.setState({
                 code: code
             });
@@ -80,7 +80,7 @@ class Main extends React.Component {
         } else if(this.state.code === 'FOO'){
             descount = 100;
         } else if(this.state.code === 'C'){
-            if(this.state.total >= 300.50){
+            if(this.state.price >= 300.50){
                 descount = this.state.shipping;
             }
         } else{

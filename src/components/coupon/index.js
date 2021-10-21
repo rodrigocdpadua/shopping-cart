@@ -7,6 +7,7 @@ class Coupon extends React.Component {
 
         this.state = {
             value: '',
+            couponOn: false,
             readOnly: false
         }
     }
@@ -15,21 +16,35 @@ class Coupon extends React.Component {
         this.setState({ value: event.target.value });
     }
 
-    couponFunction = () => {
+    applyCoupon = () => {
         if(this.state.value !== ''){
             this.props.couponFunction(this.state.value);
 
             this.setState({
-                readOnly: true
+                readOnly: true,
+                couponOn: true
             });
         }
+    }
+
+    removeCoupon = () => {
+        this.props.couponFunction('');
+
+        this.setState({
+            value: '',
+            readOnly: false,
+            couponOn: false
+        });
     }
 
     render(){
         return (
             <div className='coupon'>
                 <input value={this.state.value} onChange={this.handleChange} placeholder="Coupon Code" readOnly={this.state.readOnly}/>
-                <button onClick={this.couponFunction}>Apply</button>
+                {this.state.couponOn ?
+                <button onClick={this.removeCoupon}>Remove</button> :
+                <button onClick={this.applyCoupon}>Apply</button>
+                }
             </div>
         );
     }
