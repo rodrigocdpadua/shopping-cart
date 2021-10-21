@@ -9,15 +9,13 @@ class Coupon extends React.Component {
             value: '',
             readOnly: false
         }
-        this.handleChange = this.handleChange.bind(this);
-        this.couponFunction = this.couponFunction.bind(this);
     }
 
-    handleChange(event) {
+    handleChange = (event) => {
         this.setState({ value: event.target.value });
     }
 
-    couponFunction(){
+    couponFunction = () => {
         if(this.state.value !== ''){
             this.props.couponFunction(this.state.value);
 

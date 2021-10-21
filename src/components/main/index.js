@@ -15,14 +15,9 @@ class Main extends React.Component {
             descount: 0,
             total: 0
         }
-        this.purchase = this.purchase.bind(this);
-        this.shipping = this.shipping.bind(this);
-        this.coupon = this.coupon.bind(this);
-        this.descountCoupon = this.descountCoupon.bind(this);
-        this.total = this.total.bind(this);
     };
 
-    purchase(kg, price){
+    purchase = (kg, price) => {
         this.setState(state => ({
             price: state.price + price,
             kg: state.kg + kg
@@ -41,7 +36,7 @@ class Main extends React.Component {
         }, 1);
     }
 
-    shipping(){
+    shipping = () => {
         if(this.state.price >= 400){
             this.setState({
                 shipping: 0
@@ -58,7 +53,7 @@ class Main extends React.Component {
         }
     }
 
-    coupon(code){
+    coupon = (code) => {
         if(code === 'A' || code === 'FOO' || code === 'C'){
             this.setState({
                 code: code
@@ -77,26 +72,27 @@ class Main extends React.Component {
         }
     }
 
-    descountCoupon(){
+    descountCoupon = () => {
         let descount = 0;
-        let withoutCoupon = this.state.price;
 
         if(this.state.code === 'A'){
-            descount = (withoutCoupon*30)/100;
+            descount = (this.state.price*30)/100;
         } else if(this.state.code === 'FOO'){
             descount = 100;
         } else if(this.state.code === 'C'){
             if(this.state.total >= 300.50){
                 descount = this.state.shipping;
             }
+        } else{
+            descount = 0;
         }
         this.setState({
             descount: descount
         });
     }
 
-    total(){
-        let total = this.state.price + this.state.shipping - this.state.descount;
+    total = () => {
+        const total = this.state.price + this.state.shipping - this.state.descount;
 
         this.setState({
             total: total

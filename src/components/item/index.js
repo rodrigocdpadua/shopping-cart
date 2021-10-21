@@ -11,17 +11,15 @@ class Item extends React.Component {
             price: this.props.price,
             value: ''
         }
-        this.handleChange = this.handleChange.bind(this);
-        this.purchaseFunction = this.purchaseFunction.bind(this);
     }
 
-    handleChange(event) {
+    handleChange = (event) => {
         this.setState({value: parseInt(event.target.value) });
     }
 
-    purchaseFunction(){
+    purchaseFunction = () => {
         if(this.state.value !== ''){
-            let priceKG = this.state.value * this.state.price;
+            const priceKG = this.state.value * this.state.price;
             this.props.purchaseFunction(this.state.value, priceKG);
             this.setState({
                 value: ''
