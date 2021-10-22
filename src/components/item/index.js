@@ -17,10 +17,10 @@ class Item extends React.Component {
         this.setState({value: parseInt(event.target.value) });
     }
 
-    purchaseFunction = () => {
+    addItem = () => {
         if(this.state.value !== ''){
             const priceKG = this.state.value * this.state.price;
-            this.props.purchaseFunction(this.state.value, priceKG);
+            this.props.addItem(this.state.title, this.state.value, priceKG);
             this.setState({
                 value: ''
             });
@@ -34,7 +34,7 @@ class Item extends React.Component {
                 <h2>{this.state.title}</h2>
                 <p>Price: {this.props.price.toFixed(2)} per kg</p>
                 <input value={this.state.value} type="number" onChange={this.handleChange} placeholder="kg"/>
-                <button onClick={this.purchaseFunction}>Add</button>
+                <button onClick={this.addItem}>Add</button>
             </div>
         );
     }

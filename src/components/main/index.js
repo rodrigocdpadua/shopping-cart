@@ -8,21 +8,53 @@ class Main extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            price: 0,
-            kg: 0,
+            priceTotal: 0,
+            kgTotal: 0,
             shipping: 0,
-            code: '',
+            codeCoupon: '',
             descount: 0,
-            total: 0
+            purchaseTotal: 0,
+            items: {}
         }
     };
 
-    purchase = (kg, price) => {
-        this.setState(state => ({
-            price: state.price + price,
-            kg: state.kg + kg
-        }));
+    addItem = (item, kg, price) => {
+        const updateItems = () => {
+            if(this.state.items.hasOwnProperty(item)){
+                return(Object.assign(Object.assign({}, this.state.items), {[item]: {kg: this.state.items[item].kg + kg, price: this.state.items[item].price + price}}));
+            } else {
+                return(Object.assign({[item]: {kg: kg, price: price}}, this.state.items));
+            }
+        }
 
+        this.setState({
+            items: updateItems()
+        });
+
+        setTimeout(() => {
+            this.setKgPriceTotal();
+        }, 1);
+
+        setTimeout(() => {
+            this.purchase();
+        }, 1);
+    }
+
+    setKgPriceTotal = () => {
+        const priceTotal = () => {
+            return (Object.keys(this.state.items).reduce((count, item) => count + this.state.items[item].price, 0));
+        }
+        const kgTotal = () => {
+            return (Object.keys(this.state.items).reduce((count, item) => count + this.state.items[item].kg, 0));
+        }
+
+        this.setState ({
+            priceTotal: priceTotal(),
+            kgTotal: kgTotal()
+        });
+    }
+
+    purchase = () => {
         setTimeout(() => {
             this.shipping();
         }, 1);
@@ -37,25 +69,25 @@ class Main extends React.Component {
     }
 
     shipping = () => {
-        if(this.state.price >= 400){
+        if(this.state.priceTotal >= 400){
             this.setState({
                 shipping: 0
             });
-        } else if(this.state.kg <= 10){
+        } else if(this.state.kgTotal <= 10){
             this.setState({
                 shipping: 30
             });
         } else {
-            let currentShipping = (Math.trunc((this.state.kg - 10)/5)*7) + 30;
+            const currentShipping = (Math.trunc((this.state.kgTotal - 10)/5)*7) + 30;
             this.setState({
                 shipping: currentShipping
             });
         }
     }
 
-    coupon = (code) => {
+    coupon = (codeCoupon) => {
         this.setState({
-            code: code
+            codeCoupon: codeCoupon
         });
 
         setTimeout(() => {
@@ -68,42 +100,46 @@ class Main extends React.Component {
     }
 
     descountCoupon = () => {
-        let descount = 0;
-
-        if(this.state.code === 'A'){
-            descount = (this.state.price*30)/100;
-        } else if(this.state.code === 'FOO'){
-            descount = 100;
-        } else if(this.state.code === 'C'){
-            if(this.state.price >= 300.50){
-                descount = this.state.shipping;
+        const descount = () => {
+            if(this.state.codeCoupon === 'A'){
+                return (this.state.priceTotal*30)/100;
+            } else if(this.state.codeCoupon === 'FOO'){
+                return 100;
+            } else if(this.state.codeCoupon === 'C'){
+                if(this.state.priceTotal >= 300.50){
+                    return this.state.shipping;
+                } else {
+                    return 0;
+                }
+            } else{
+                return 0;
             }
-        } else{
-            descount = 0;
         }
+
         this.setState({
-            descount: descount
+            descount: descount()
         });
     }
 
     total = () => {
-        const total = this.state.price + this.state.shipping - this.state.descount;
+        const total = this.state.priceTotal + this.state.shipping - this.state.descount;
 
         this.setState({
-            total: total
+            purchaseTotal: total
         });
     }
 
     render(){
         return (
             <main className='main'>
-                <ListItems purchaseFunction={this.purchase}/>
+                <ListItems addItem={this.addItem}/>
                 <Coupon couponFunction={this.coupon}/>
                 <Purchase 
-                price={this.state.price}
-                shipping={this.state.shipping}
-                descount={this.state.descount}
-                total={this.state.total}
+                    price={this.state.priceTotal}
+                    shipping={this.state.shipping}
+                    descount={this.state.descount}
+                    total={this.state.purchaseTotal}
+                    items={this.state.items}
                 />
             </main>
         );
