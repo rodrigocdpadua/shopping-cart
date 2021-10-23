@@ -2,6 +2,10 @@ import React from 'react';
 import '../../styles.css';
 
 class ListPurchase extends React.Component {
+    removeItem = (event) => {
+        this.props.removeItem(event.target.value);
+    }
+
     render(){
         return(
             <div className='bag'>
@@ -23,6 +27,7 @@ class ListPurchase extends React.Component {
                                             <td className='item-column'>{item}</td>
                                             <td className='kg-column'>{this.props.items[item].kg + ' kg'}</td>
                                             <td className='price-column'>{this.props.items[item].price.toFixed(2)}</td>
+                                            <td><button value={item} className='button-column' onClick={this.removeItem}>x</button></td>
                                         </tr>
                                     );
                                 })

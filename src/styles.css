@@ -4,8 +4,13 @@
     font-family: Apple Chancery, cursive;
 }
 
+:root{
+    --color-1: #ff933a;
+    --color-2: #ff3a3a;
+}
+
 body{
-    background-color: #ff811b;
+    background-color: var(--color-1);
 }
 
 .header{
@@ -14,8 +19,8 @@ body{
     align-items: center;
     padding-top: 20px;
     padding-bottom: 20px;
-    color: #ff811b;
-    background-color: #ff1b1b;
+    color: var(--color-1);
+    background-color: var(--color-2);
 }
 
 .main{
@@ -40,7 +45,7 @@ body{
     align-items: center;
     height: 100%;
     color: #000000;
-    background-color: #ff1b1b;
+    background-color: var(--color-2);
     border: 1px solid #000000;
     border-radius: 5px;
 }
@@ -67,7 +72,7 @@ body{
     width: 100%;
     padding-top: 20px;
     padding-bottom: 20px;
-    background-color: #ff1b1b;
+    background-color: var(--color-2);
 }
 .coupon input{
     margin-right: 5px;
@@ -79,8 +84,13 @@ body{
     margin-left: 5px;
     padding-right: 5px;
     padding-left: 5px;
-    background-color: #1bff1b;
     border-radius: 5px;
+}
+.coupon .apply-button{
+    background-color: #1bff1b;
+}
+.coupon .remove-button{
+    background-color: #ff1b1b;
 }
 
 .purchase{
@@ -89,6 +99,13 @@ body{
     align-items: center;
     width: 100%;
     padding-top: 10px;
+}
+.purchase .button-column{
+    padding-right: 6px;
+    padding-bottom: 3px;
+    padding-left: 6px;
+    border-radius: 5px;
+    background-color: #ff1b1b;
 }
 
 .bag {

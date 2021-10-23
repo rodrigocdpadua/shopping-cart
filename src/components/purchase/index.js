@@ -4,7 +4,7 @@ import '../../styles.css';
 const Purchase = (props) => {
     return (
         <div className='purchase'>
-            <ListPurchase items={props.items}/>
+            <ListPurchase items={props.items} removeItem={props.removeItem}/>
             <table className='table-purchase'>
                 <tbody>
                     <tr>

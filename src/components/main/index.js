@@ -40,6 +40,26 @@ class Main extends React.Component {
         }, 1);
     }
 
+    removeItem = (item) => {
+        const removed = () => {
+            let r = Object.assign({}, this.state.items);
+            delete r[item];
+            return r;
+        }
+
+        this.setState ({
+            items: removed()
+        });
+
+        setTimeout(() => {
+            this.setKgPriceTotal();
+        }, 1);
+
+        setTimeout(() => {
+            this.purchase();
+        }, 1);
+    }
+
     setKgPriceTotal = () => {
         const priceTotal = () => {
             return (Object.keys(this.state.items).reduce((count, item) => count + this.state.items[item].price, 0));
@@ -122,10 +142,17 @@ class Main extends React.Component {
     }
 
     total = () => {
-        const total = this.state.priceTotal + this.state.shipping - this.state.descount;
+        const total = () => {
+            const t = this.state.priceTotal + this.state.shipping - this.state.descount;
+            if(this.state.priceTotal > 0 && t >= 0){
+                return t;
+            } else {
+                return 0;
+            }
+        }
 
         this.setState({
-            purchaseTotal: total
+            purchaseTotal: total()
         });
     }
 
@@ -140,6 +167,7 @@ class Main extends React.Component {
                     descount={this.state.descount}
                     total={this.state.purchaseTotal}
                     items={this.state.items}
+                    removeItem={this.removeItem}
                 />
             </main>
         );

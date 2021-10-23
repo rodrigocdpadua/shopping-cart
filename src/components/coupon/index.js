@@ -48,8 +48,8 @@ class Coupon extends React.Component {
             <div className='coupon'>
                 <input value={this.state.value} onChange={this.handleChange} placeholder="Coupon Code" readOnly={this.state.readOnly}/>
                 {this.state.couponOn ?
-                <button onClick={this.removeCoupon}>Remove</button> :
-                <button onClick={this.applyCoupon}>Apply</button>
+                <button className="remove-button" onClick={this.removeCoupon}>Remove</button> :
+                <button className="apply-button" onClick={this.applyCoupon}>Apply</button>
                 }
             </div>
         );
